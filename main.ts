@@ -38,6 +38,7 @@ function LVL_one () {
     200,
     true
     )
+    music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (LVL_1) {
@@ -82,6 +83,7 @@ function LVL_Boss () {
     200,
     true
     )
+    music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
 }
 function LVL_three () {
     LVL_3 = true
@@ -171,22 +173,23 @@ function LVL_three () {
     200,
     true
     )
+    music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
 }
 function Kill2 () {
     animation.runImageAnimation(
     arlo,
     assets.animation`myAnim0`,
-    200,
+    100,
     false
     )
     if (arlo.overlapsWith(Enemy_4)) {
-        sprites.destroy(Enemy_4)
+        sprites.destroy(Enemy_4, effects.blizzard, 500)
     } else if (arlo.overlapsWith(Enemy_5)) {
-        sprites.destroy(Enemy_5)
+        sprites.destroy(Enemy_5, effects.blizzard, 500)
     } else if (arlo.overlapsWith(Enemy_6)) {
-        sprites.destroy(Enemy_6)
+        sprites.destroy(Enemy_6, effects.blizzard, 500)
     } else if (arlo.overlapsWith(Enemy_7)) {
-        sprites.destroy(Enemy_7)
+        sprites.destroy(Enemy_7, effects.blizzard, 500)
     }
 }
 function Kill () {
@@ -197,11 +200,11 @@ function Kill () {
     false
     )
     if (arlo.overlapsWith(Enemy1)) {
-        sprites.destroy(Enemy1)
+        sprites.destroy(Enemy1, effects.ashes, 500)
     } else if (arlo.overlapsWith(Enemy_2)) {
-        sprites.destroy(Enemy_2)
+        sprites.destroy(Enemy_2, effects.ashes, 500)
     } else if (arlo.overlapsWith(Enemy_3)) {
-        sprites.destroy(Enemy_3)
+        sprites.destroy(Enemy_3, effects.ashes, 500)
     }
 }
 function BOSSMAN_Kill () {
@@ -275,16 +278,29 @@ function LVL_two () {
     200,
     true
     )
+    music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
 }
 function Kill_Boss () {
+    animation.runImageAnimation(
+    arlo,
+    assets.animation`myAnim0`,
+    100,
+    false
+    )
     if (arlo.overlapsWith(BOSSMAN)) {
         BOSSMAN_Lives += 1
         if (BOSSMAN_Lives == 7) {
-            sprites.destroy(BOSSMAN)
+            sprites.destroy(BOSSMAN, effects.fire, 500)
         }
     }
 }
 function Kill3 () {
+    animation.runImageAnimation(
+    arlo,
+    assets.animation`myAnim0`,
+    100,
+    false
+    )
     if (arlo.overlapsWith(Enemy_8)) {
         Enemy_8_lives += 1
         if (Enemy_8_lives == 4) {
@@ -334,6 +350,7 @@ scene.cameraFollowSprite(arlo)
 tiles.setCurrentTilemap(tilemap`Start`)
 // Sætter Arlo's startposition i verdenen
 arlo.setPosition(33, 110)
+let Spawn = true
 info.setLife(5)
 animation.runImageAnimation(
 arlo,
